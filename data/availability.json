@@ -1,5 +1,5 @@
 {
-  "apartamento": "Blue Luxury Residence",
+  "apartamento": "White House",
   "reservado": [
     { "inicio": "2026-08-05", "fim": "2026-08-10" },
     { "inicio": "2026-08-14", "fim": "2026-08-18" },
@@ -12,9 +12,9 @@
     { "min": 14, "max": null, "valor": 15000, "label": "14 dias ou mais" }
   ],
   "contacto": {
-    "whatsapp": "244923000000",
-    "telefone": "+244 923 000 000",
-    "email": "reservas@blueluxuryresidence.ao",
+    "whatsapp": "244945213124",
+    "telefone": "+244 945 213 124",
+    "email": "reservas@whitehouseluanda.ao",
     "localizacao": "Luanda, Angola"
   }
 }

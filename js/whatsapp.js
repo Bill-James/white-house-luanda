@@ -40,7 +40,7 @@
     }
 
     const message = buildMessage();
-    const waNumber = (BookingState.contact && BookingState.contact.whatsapp) || '244923000000';
+    const waNumber = (BookingState.contact && BookingState.contact.whatsapp) || '244945213124';
     const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
 
     // Pequena animação cinematográfica antes de abrir o WhatsApp
