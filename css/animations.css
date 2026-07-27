@@ -1,0 +1,73 @@
+/* ===== Lamp lit state ===== */
+body.lit .lamp-bulb{
+  box-shadow:0 0 40px 14px rgba(47,216,255,0.9);
+  background:#eaffff;
+}
+body.lit .lamp-glow{
+  opacity:1;
+  transform:scale(1.6);
+}
+
+@keyframes flicker{
+  0%,100%{opacity:1;}
+  48%{opacity:0.85;}
+  50%{opacity:1;}
+  52%{opacity:0.9;}
+}
+body.lit .lamp-bulb{animation:flicker 3s ease-in-out infinite;}
+
+/* ===== Intro exit ===== */
+#intro.hide{
+  opacity:0;
+  pointer-events:none;
+}
+
+/* ===== Scroll reveal ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+.reveal.in-view{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ===== Ambient particles ===== */
+.particle{
+  position:absolute;
+  border-radius:50%;
+  background:var(--blue-neon, #2fd8ff);
+  opacity:0.25;
+  pointer-events:none;
+}
+
+/* ===== Confirm overlay flash ===== */
+@keyframes confirmPulse{
+  0%{opacity:0;}
+  30%{opacity:1;}
+  70%{opacity:1;}
+  100%{opacity:0;}
+}
+.confirm-overlay.show .confirm-flash{
+  animation:confirmPulse 1.6s ease;
+}
+.confirm-overlay.show p{
+  animation:fadeUp 1.2s ease .3s both;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(14px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ===== Scroll hint bounce ===== */
+@keyframes bounce{
+  0%,100%{transform:translate(-50%,0);opacity:0.6;}
+  50%{transform:translate(-50%,6px);opacity:1;}
+}
+.scroll-hint{animation:bounce 2.4s ease-in-out infinite;}
+
+/* ===== Respect reduced motion ===== */
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+}

@@ -1,0 +1,22 @@
+@media (max-width: 1024px){
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .info-grid{grid-template-columns:repeat(2,1fr);}
+  .booking-layout{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+
+@media (max-width: 768px){
+  #navbar nav{display:none;}
+  section{padding:80px 6vw;}
+  .gallery-grid{grid-template-columns:1fr;}
+  .info-grid{grid-template-columns:1fr 1fr;}
+  .form-card{grid-template-columns:1fr;padding:24px;}
+  .footer-grid{grid-template-columns:1fr;gap:28px;}
+  .hero-cta{flex-direction:column;align-items:center;}
+  .lamp-glow{width:400px;height:400px;}
+}
+
+@media (max-width: 480px){
+  .info-grid{grid-template-columns:1fr;}
+  h1{font-size:2rem;}
+}
