@@ -1,14 +1,11 @@
 // app.js — orquestração geral (nav, cartões de comodidades, reveals)
 
 const AMENITIES = [
-  { icon: '📶', label: 'Wi-Fi Fibra' },
-  { icon: '❄️', label: 'Ar Condicionado' },
-  { icon: '📺', label: 'TV Smart' },
-  { icon: '🚗', label: 'Estacionamento' },
-  { icon: '🛡️', label: 'Segurança 24h' },
+  { icon: '📶', label: 'Internet' },
+  { icon: '❄️', label: 'Climatização' },
+  { icon: '📺', label: 'Serviço de TV' },
   { icon: '🚿', label: 'Água Quente' },
-  { icon: '🌊', label: 'Vista Mar' },
-  { icon: '🧹', label: 'Limpeza Incluída' }
+  { icon: '🍳', label: 'Cozinha Equipada' }
 ];
 
 (function () {

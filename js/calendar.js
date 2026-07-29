@@ -140,8 +140,10 @@ const BookingState = {
     const phone = document.getElementById('footer-phone');
     const email = document.getElementById('footer-email');
     const wa = document.getElementById('footer-whatsapp');
+    const ig = document.getElementById('footer-instagram');
     if (phone) phone.textContent = contacto.telefone || '';
     if (email) email.textContent = contacto.email || '';
     if (wa && contacto.whatsapp) wa.href = `https://wa.me/${contacto.whatsapp}`;
+    if (ig && contacto.instagram) ig.href = contacto.instagram;
   }
 })();

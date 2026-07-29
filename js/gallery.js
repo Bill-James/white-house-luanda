@@ -2,34 +2,44 @@
 
 const GALLERY_ITEMS = [
   {
-    img: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop',
+    img: 'assets/imagens/sala.jpg',
     title: 'Sala',
-    tags: ['45 m²', 'Smart TV', 'Internet Fibra', 'Vista Mar']
+    tags: ['Sofá', 'Mesa de Jantar', 'TV', 'Ar Condicionado']
   },
   {
-    img: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop',
+    img: 'assets/imagens/sala-jantar.jpg',
+    title: 'Zona de Estar',
+    tags: ['Espaço de Refeições', 'TV', 'Ambiente Reservado']
+  },
+  {
+    img: 'assets/imagens/quarto.jpg',
     title: 'Quarto',
-    tags: ['Cama Queen Size', 'Ar Condicionado', 'Varanda', 'Iluminação Inteligente']
+    tags: ['Cama de Casal', 'Roupa de Cama Incluída', 'Toalhas Incluídas', 'Cortinado']
   },
   {
-    img: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1200&auto=format&fit=crop',
+    img: 'assets/imagens/cozinha-bancada.jpg',
     title: 'Cozinha',
-    tags: ['Equipada', 'Ilha Central', 'Eletrodomésticos Novos']
+    tags: ['Kitchenette Equipada', 'Torradeira', 'Jarro Elétrico', 'Louça Incluída']
   },
   {
-    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
-    title: 'Casa de Banho',
-    tags: ['Duche a Vapor', 'Água Quente', 'Acabamento Premium']
+    img: 'assets/imagens/cozinha-eletros.jpg',
+    title: 'Cozinha — Eletrodomésticos',
+    tags: ['Frigorífico', 'Micro-ondas', 'Sem Fogão']
   },
   {
-    img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop',
-    title: 'Varanda',
-    tags: ['Vista Mar', 'Mobiliário Exterior', 'Pôr do Sol']
+    img: 'assets/imagens/vista-janela.jpg',
+    title: 'Localização',
+    tags: ['Zona Central de Luanda', 'Fácil Acesso']
   },
   {
-    img: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200&auto=format&fit=crop',
-    title: 'Entrada',
-    tags: ['Segurança 24h', 'Receção Privada']
+    img: 'assets/imagens/centro-cidade.jpg',
+    title: 'Centro da Cidade',
+    tags: ['A poucos minutos', 'Banco de Desenvolvimento de Angola', 'Fácil Acesso']
+  },
+  {
+    img: 'assets/imagens/hero-marginal-luanda.jpg',
+    title: 'Marginal de Luanda',
+    tags: ['Passeio à Beira-Mar', 'A curta distância']
   }
 ];
 

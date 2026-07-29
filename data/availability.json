@@ -1,10 +1,6 @@
 {
   "apartamento": "White House",
-  "reservado": [
-    { "inicio": "2026-08-05", "fim": "2026-08-10" },
-    { "inicio": "2026-08-14", "fim": "2026-08-18" },
-    { "inicio": "2026-09-01", "fim": "2026-09-04" }
-  ],
+  "reservado": [],
   "precos": [
     { "min": 1, "max": 1, "valor": 32000, "label": "1 dia" },
     { "min": 2, "max": 6, "valor": 25000, "label": "2 a 6 dias" },
@@ -15,6 +11,8 @@
     "whatsapp": "244945213124",
     "telefone": "+244 945 213 124",
     "email": "reservas@whitehouseluanda.ao",
-    "localizacao": "Luanda, Angola"
+    "localizacao": "Luanda, Angola",
+    "instagram": "https://www.instagram.com/white864115?igsh=cTN5Zmhodng2ZWFo&utm_source=qr"
   }
 }
+
