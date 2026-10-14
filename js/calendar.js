@@ -95,6 +95,13 @@ const BookingState = { items: [], priceInfo: null, contact: null };
       : 'Selecione data e horário em "Disponibilidade" para continuar.';
   }
 
+  document.addEventListener('booking:reset', () => {
+    BookingState.items = [];
+    BookingState.priceInfo = null;
+    if (currentDate) renderSlots();
+    updateSummary();
+  });
+
   function renderFooterContact(contacto) {
     if (!contacto) return;
     const phone = document.getElementById('footer-phone');

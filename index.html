@@ -148,7 +148,7 @@
       </div>
       <div class="field">
         <label for="f-telefone">Telefone</label>
-        <input type="tel" id="f-telefone" placeholder="923 881 741" autocomplete="tel">
+        <input type="tel" id="f-telefone" placeholder="945 213 124" autocomplete="tel">
       </div>
       <div class="field">
         <label for="f-email">Email</label>
@@ -160,6 +160,14 @@
       </div>
       <button id="confirm-btn" class="btn btn-primary btn-wide" disabled>Confirmar Reserva</button>
       <p id="confirm-hint" class="confirm-hint">Selecione data e horário em "Disponibilidade" para continuar.</p>
+      <div id="done" class="field-full" style="display:none;text-align:center">
+        <p id="done-msg" class="confirm-hint"></p>
+        <div id="done-buttons" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:16px">
+          <button id="done-new" class="btn btn-primary" type="button">Fazer nova reserva</button>
+          <button id="done-retry" class="btn btn-ghost" type="button">Abrir WhatsApp outra vez</button>
+          <button id="done-end" class="btn btn-ghost" type="button">Terminar</button>
+        </div>
+      </div>
     </div>
   </section>
 

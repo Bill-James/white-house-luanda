@@ -3,6 +3,19 @@
   const overlay = document.getElementById('confirm-overlay');
   if (!confirmBtn) return;
 
+  const form = confirmBtn.parentElement;
+  const done = document.getElementById('done');
+  const doneMsg = document.getElementById('done-msg');
+  const doneButtons = document.getElementById('done-buttons');
+  let lastUrl = '';
+
+  const showForm = (on) => [...form.children].forEach((c) => (c.style.display = (c === done) === on ? 'none' : ''));
+
+  const reset = () => {
+    ['f-nome', 'f-telefone', 'f-email', 'f-obs'].forEach((id) => (document.getElementById(id).value = ''));
+    document.dispatchEvent(new CustomEvent('booking:reset'));
+  };
+
   function buildMessage() {
     const nome = document.getElementById('f-nome').value.trim() || 'Não informado';
     const telefone = document.getElementById('f-telefone').value.trim() || 'Não informado';
@@ -23,15 +36,33 @@
     }
 
     const waNumber = (BookingState.contact && BookingState.contact.whatsapp) || '244945213124';
-    const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(buildMessage())}`;
+    lastUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(buildMessage())}`;
 
     overlay.removeAttribute('hidden');
     overlay.classList.add('show');
 
     setTimeout(() => {
-      window.open(url, '_blank');
+      window.open(lastUrl, '_blank');
       overlay.classList.remove('show');
       overlay.setAttribute('hidden', '');
+      doneMsg.textContent = 'O WhatsApp foi aberto com a sua reserva. Só fica registada depois de enviar a mensagem.';
+      doneButtons.style.display = 'flex';
+      showForm(false);
     }, 1500);
+  });
+
+  document.getElementById('done-retry').addEventListener('click', () => window.open(lastUrl, '_blank'));
+
+  document.getElementById('done-new').addEventListener('click', () => {
+    reset();
+    showForm(true);
+    document.getElementById('disponibilidade').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  document.getElementById('done-end').addEventListener('click', () => {
+    reset();
+    doneMsg.textContent = 'Obrigado pela sua preferência. Até breve.';
+    doneButtons.style.display = 'none';
+    document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
   });
 })();
