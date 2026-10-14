@@ -1,46 +1,32 @@
-// calendar.js — calendário de reservas (estilo Airbnb) + verificação de disponibilidade
-
-const BookingState = {
-  checkin: null,
-  checkout: null,
-  days: 0,
-  priceInfo: null,
-  contact: null
-};
+const BookingState = { items: [], priceInfo: null, contact: null };
 
 (function () {
   const msgEl = document.getElementById('calendar-msg');
+  const slotsEl = document.getElementById('slots');
   const confirmBtn = document.getElementById('confirm-btn');
   const confirmHint = document.getElementById('confirm-hint');
 
-  let reservedRanges = [];
+  let reserved = new Set();
+  let currentDate = null;
 
   fetch('data/availability.json')
     .then((r) => r.json())
     .then((data) => {
-      reservedRanges = (data.reservado || []).map((r) => ({
-        from: r.inicio,
-        to: r.fim
-      }));
+      reserved = new Set(data.reservado || []);
       if (data.precos) Pricing.setTable(data.precos);
       BookingState.contact = data.contacto || null;
       initCalendar();
       renderFooterContact(data.contacto);
     })
-    .catch(() => {
-      // Sem ficheiro de disponibilidade — segue com calendário livre e preços por defeito.
-      initCalendar();
-    });
+    .catch(initCalendar);
 
   function initCalendar() {
     if (!window.flatpickr) return;
 
     flatpickr('#calendar', {
-      mode: 'range',
       inline: true,
       minDate: 'today',
       dateFormat: 'Y-m-d',
-      disable: reservedRanges,
       locale: {
         weekdays: {
           shorthand: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
@@ -49,90 +35,64 @@ const BookingState = {
         months: {
           shorthand: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
           longhand: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-        },
-        rangeSeparator: ' até '
+        }
       },
-      onChange: handleDateChange
+      onChange: (_, date) => {
+        if (!date) return;
+        currentDate = date;
+        renderSlots();
+      }
     });
   }
 
-  function overlapsReserved(checkin, checkout) {
-    return reservedRanges.some((r) => {
-      const rFrom = new Date(r.from);
-      const rTo = new Date(r.to);
-      return checkin < rTo && checkout > rFrom;
+  const el = (tag, cls, text) => Object.assign(document.createElement(tag), { className: cls, textContent: text });
+  const free = (s) => !reserved.has(`${currentDate}|${s.id}`) && Pricing.bookable(currentDate, s);
+  const isOn = (id) => BookingState.items.some((x) => x.date === currentDate && x.id === id);
+
+  function slotBtn(s) {
+    const ok = free(s);
+    const b = el('button', 'btn ' + (isOn(s.id) ? 'btn-primary' : 'btn-ghost'), `${s.label} · ${Pricing.formatKz(s.valor)}`);
+    b.type = 'button';
+    b.disabled = !ok;
+    if (!ok) b.style.opacity = 0.35;
+    b.onclick = () => toggle(s.id);
+    return b;
+  }
+
+  function renderSlots() {
+    const table = Pricing.getTable();
+    msgEl.textContent = 'Sem horários livres nesta data. As reservas exigem 24h de antecedência.';
+    msgEl.hidden = table.some(free);
+    slotsEl.replaceChildren();
+    [...new Set(table.map((s) => s.grupo))].forEach((g) => {
+      const row = el('div', '', '');
+      row.style.cssText = 'display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px';
+      table.filter((s) => s.grupo === g).forEach((s) => row.appendChild(slotBtn(s)));
+      slotsEl.append(el('p', 'confirm-hint', g), row);
     });
   }
 
-  function handleDateChange(selectedDates) {
-    if (selectedDates.length < 2) return;
-
-    const [checkin, checkout] = selectedDates;
-    const msDay = 1000 * 60 * 60 * 24;
-    const days = Math.round((checkout - checkin) / msDay);
-
-    if (days < 1) {
-      showMsg('Selecione uma saída posterior à entrada.');
-      resetSummary();
-      return;
-    }
-
-    if (overlapsReserved(checkin, checkout)) {
-      showMsg('Estas datas já se encontram reservadas.');
-      resetSummary();
-      return;
-    }
-
-    hideMsg();
-
-    const priceInfo = Pricing.calculate(days);
-    BookingState.checkin = checkin;
-    BookingState.checkout = checkout;
-    BookingState.days = days;
-    BookingState.priceInfo = priceInfo;
-
-    updateSummary(checkin, checkout, priceInfo);
-    document.dispatchEvent(new CustomEvent('booking:updated'));
+  function toggle(id) {
+    const items = BookingState.items;
+    const i = items.findIndex((x) => x.date === currentDate && x.id === id);
+    if (i < 0) items.push({ date: currentDate, id });
+    else items.splice(i, 1);
+    items.sort((a, b) => a.date.localeCompare(b.date) || Pricing.find(a.id).h - Pricing.find(b.id).h);
+    BookingState.priceInfo = Pricing.calculate(items);
+    renderSlots();
+    updateSummary();
   }
 
-  function showMsg(text) {
-    msgEl.textContent = text;
-    msgEl.removeAttribute('hidden');
-  }
-  function hideMsg() {
-    msgEl.setAttribute('hidden', '');
-  }
-
-  function fmtDate(d) {
-    return d.toLocaleDateString('pt-PT', { day: '2-digit', month: 'long' });
-  }
-
-  function updateSummary(checkin, checkout, priceInfo) {
-    document.getElementById('sum-checkin').textContent = fmtDate(checkin);
-    document.getElementById('sum-checkout').textContent = fmtDate(checkout);
-    document.getElementById('sum-days').textContent = priceInfo.days + (priceInfo.days === 1 ? ' dia' : ' dias');
-    document.getElementById('sum-price-day').textContent = Pricing.formatKz(priceInfo.pricePerDay);
-    document.getElementById('sum-normal').textContent = Pricing.formatKz(priceInfo.normalPrice);
-    document.getElementById('sum-savings').textContent = Pricing.formatKz(priceInfo.savings);
-    document.getElementById('sum-total').textContent = Pricing.formatKz(priceInfo.subtotal);
-
-    const badge = document.getElementById('sum-badge');
-    if (priceInfo.isMaxDiscount) badge.removeAttribute('hidden');
-    else badge.setAttribute('hidden', '');
-
-    confirmBtn.disabled = false;
-    confirmHint.textContent = 'Reveja os seus dados e confirme a reserva.';
-  }
-
-  function resetSummary() {
-    ['sum-checkin', 'sum-checkout', 'sum-days', 'sum-price-day', 'sum-normal', 'sum-savings', 'sum-total']
-      .forEach((id) => (document.getElementById(id).textContent = '—'));
-    document.getElementById('sum-badge').setAttribute('hidden', '');
-    confirmBtn.disabled = true;
-    confirmHint.textContent = 'Selecione as datas em "Disponibilidade" para continuar.';
-    BookingState.checkin = null;
-    BookingState.checkout = null;
-    BookingState.priceInfo = null;
+  function updateSummary() {
+    const p = BookingState.priceInfo;
+    const set = (id, v) => (document.getElementById(id).innerHTML = v);
+    set('sum-slots', p ? p.lines.join('<br>') : '—');
+    set('sum-count', p ? `${p.count} ${p.count === 1 ? 'período' : 'períodos'}` : '—');
+    set('sum-total', p ? Pricing.formatKz(p.total) : '—');
+    confirmBtn.disabled = !p;
+    confirmHint.textContent = p
+      ? 'Reveja os seus dados e confirme a reserva.'
+      : 'Selecione data e horário em "Disponibilidade" para continuar.';
   }
 
   function renderFooterContact(contacto) {

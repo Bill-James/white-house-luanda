@@ -1,6 +1,8 @@
 // app.js — orquestração geral (nav, cartões de comodidades, reveals)
 
 const AMENITIES = [
+  { icon: '🔒', label: 'Privacidade Total' },
+  { icon: '✨', label: 'Limpeza Real entre Estadias' },
   { icon: '📶', label: 'Internet' },
   { icon: '❄️', label: 'Climatização' },
   { icon: '📺', label: 'Serviço de TV' },

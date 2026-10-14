@@ -2,10 +2,14 @@
   "apartamento": "White House",
   "reservado": [],
   "precos": [
-    { "min": 1, "max": 1, "valor": 32000, "label": "1 dia" },
-    { "min": 2, "max": 6, "valor": 25000, "label": "2 a 6 dias" },
-    { "min": 7, "max": 13, "valor": 20000, "label": "7 a 13 dias" },
-    { "min": 14, "max": null, "valor": 15000, "label": "14 dias ou mais" }
+    { "id": "h8", "grupo": "Manhã · por hora", "label": "8h–9h", "h": 8, "valor": 7500 },
+    { "id": "h9", "grupo": "Manhã · por hora", "label": "9h–10h", "h": 9, "valor": 7500 },
+    { "id": "h10", "grupo": "Manhã · por hora", "label": "10h–11h", "h": 10, "valor": 7500 },
+    { "id": "h11", "grupo": "Manhã · por hora", "label": "11h–12h", "h": 11, "valor": 7500 },
+    { "id": "t12", "grupo": "Tarde · blocos de 2h seguidas", "label": "12h–14h", "h": 12, "valor": 15000 },
+    { "id": "t14", "grupo": "Tarde · blocos de 2h seguidas", "label": "14h–16h", "h": 14, "valor": 15000 },
+    { "id": "t16", "grupo": "Tarde · blocos de 2h seguidas", "label": "16h–18h", "h": 16, "valor": 15000 },
+    { "id": "n19", "grupo": "Noite", "label": "19h–7h", "h": 19, "valor": 20000 }
   ],
   "contacto": {
     "whatsapp": "244945213124",
@@ -15,4 +19,3 @@
     "instagram": "https://www.instagram.com/white864115?igsh=cTN5Zmhodng2ZWFo&utm_source=qr"
   }
 }
-

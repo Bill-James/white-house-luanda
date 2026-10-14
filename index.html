@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>White House — Reserve o seu próximo lar</title>
-<meta name="description" content="Um apartamento premium em Luanda. Acenda a luz e descubra o seu próximo lar.">
+<meta name="description" content="T1 privado em Luanda para estadias curtas, por hora ou por noite. Privacidade total e limpeza real entre cada estadia.">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,7 +69,7 @@
       <p class="eyebrow">Luanda · T1 Funcional</p>
       <h1>White House</h1>
       <div class="stars" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="hero-desc">Um T1 funcional no centro de Luanda, pensado para estadias curtas. Cozinha equipada, água quente, internet, TV e climatização — tudo o que precisa, sem complicações.</p>
+      <p class="hero-desc">Um T1 só seu no centro de Luanda, para estadias curtas por hora ou por noite. Privacidade total, sem recepção nem estranhos, e limpeza a sério entre cada estadia. Não é uma hospedaria. Cozinha equipada, água quente, internet, TV e climatização.</p>
       <div class="hero-cta">
         <a href="#reservar" class="btn btn-primary">Reservar Agora</a>
         <a href="#galeria" class="btn btn-ghost">Explorar Apartamento</a>
@@ -111,27 +111,25 @@
   <section id="disponibilidade">
     <div class="section-head">
       <p class="eyebrow">04 — Disponibilidade</p>
-      <h2>Escolha as suas datas</h2>
+      <h2>Escolha a data e o horário</h2>
     </div>
+    <p class="confirm-hint">Manhã (8h–12h) por hora, tarde (12h–18h) em blocos de 2h seguidas e noite das 19h às 7h. As horas entre 18h–19h e 7h–8h são reservadas à limpeza completa do apartamento. Reserva e pagamento total com pelo menos 24h de antecedência.</p>
 
     <div class="booking-layout">
       <div class="calendar-card">
         <div id="calendar"></div>
         <p id="calendar-msg" class="calendar-msg" hidden></p>
+        <div id="slots"><p class="confirm-hint">Escolha uma data para ver os horários.</p></div>
       </div>
 
       <aside class="summary-card" id="summary-card">
         <h3>Resumo da estadia</h3>
         <dl>
-          <div class="summary-row"><dt>Entrada</dt><dd id="sum-checkin">—</dd></div>
-          <div class="summary-row"><dt>Saída</dt><dd id="sum-checkout">—</dd></div>
-          <div class="summary-row"><dt>Número de dias</dt><dd id="sum-days">—</dd></div>
-          <div class="summary-row"><dt>Preço por dia</dt><dd id="sum-price-day">—</dd></div>
-          <div class="summary-row subtle"><dt>Preço normal</dt><dd id="sum-normal">—</dd></div>
-          <div class="summary-row discount"><dt>Poupança</dt><dd id="sum-savings">—</dd></div>
+          <div class="summary-row"><dt>Horários</dt><dd id="sum-slots">—</dd></div>
+          <div class="summary-row"><dt>Períodos</dt><dd id="sum-count">—</dd></div>
           <div class="summary-row total"><dt>Valor Total</dt><dd id="sum-total">—</dd></div>
         </dl>
-        <p id="sum-badge" class="sum-badge" hidden>Parabéns. Ganhou o nosso maior desconto.</p>
+        <p class="sum-badge">Pagamento total até 24h antes da entrada.</p>
       </aside>
     </div>
   </section>
@@ -161,7 +159,7 @@
         <textarea id="f-obs" rows="3" placeholder="Alguma preferência ou pedido especial?"></textarea>
       </div>
       <button id="confirm-btn" class="btn btn-primary btn-wide" disabled>Confirmar Reserva</button>
-      <p id="confirm-hint" class="confirm-hint">Selecione as datas em "Disponibilidade" para continuar.</p>
+      <p id="confirm-hint" class="confirm-hint">Selecione data e horário em "Disponibilidade" para continuar.</p>
     </div>
   </section>
 
