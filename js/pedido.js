@@ -56,7 +56,7 @@
     const box = el('div', 'field field-full food');
     box.append(
       el('span', 'food-title', 'Peça a comida (opcional)'),
-      el('p', 'food-note', 'Fica registada com a sua reserva, para estar no apartamento. Bebida e música incluídas no pacote.')
+      el('p', 'food-note', 'Fica registada com a sua reserva, para estar no apartamento. Bebida e música incluídas no pacote: diga a bebida nas observações.')
     );
     [...new Set(menu.map((m) => m.grupo))].forEach((g) => {
       box.append(el('h4', 'food-group', g));
