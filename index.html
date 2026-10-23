@@ -18,6 +18,23 @@
 
 <!-- Flatpickr theme (custom overrides in style.css) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+<style>
+.lb-nav{display:none;position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(7,10,16,.75);color:#fff;font-size:28px;cursor:pointer;align-items:center;justify-content:center;z-index:2}
+.lb-nav.on{display:flex}
+#lightbox-prev{left:16px}
+#lightbox-next{right:16px}
+.food{display:flex;flex-direction:column;gap:6px}
+.food-title{font-weight:600}
+.food-note,.food-info small{color:#9aa7b4;font-size:.85rem;margin:0}
+.food-group{margin:14px 0 0;color:#3ad7e6;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.food-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:10px 0;border-top:1px solid #232a33}
+.food-info{flex:1 1 200px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.food-price{font-weight:600;white-space:nowrap}
+.food-qty{display:flex;align-items:center;gap:6px}
+.food-qty button{width:44px;height:44px;border-radius:50%;border:1px solid #3a4452;background:#181d25;color:#fff;font-size:1.2rem;cursor:pointer}
+.food-qty output{min-width:2ch;text-align:center;font-weight:600}
+.food-total{margin:8px 0 0;font-weight:600;color:#3ad7e6}
+</style>
 </head>
 <body>
 
@@ -92,7 +109,9 @@
   <!-- LIGHTBOX -->
   <div id="lightbox" class="lightbox" hidden>
     <button id="lightbox-close" aria-label="Fechar">✕</button>
+    <button id="lightbox-prev" class="lb-nav" aria-label="Anterior">&#8249;</button>
     <img id="lightbox-img" src="" alt="">
+    <button id="lightbox-next" class="lb-nav" aria-label="Seguinte">&#8250;</button>
     <p id="lightbox-caption"></p>
   </div>
 
@@ -127,6 +146,7 @@
         <dl>
           <div class="summary-row"><dt>Horários</dt><dd id="sum-slots">—</dd></div>
           <div class="summary-row"><dt>Períodos</dt><dd id="sum-count">—</dd></div>
+          <div class="summary-row"><dt>Comida</dt><dd id="sum-food">—</dd></div>
           <div class="summary-row total"><dt>Valor Total</dt><dd id="sum-total">—</dd></div>
         </dl>
         <p class="sum-badge">Pagamento total até 24h antes da entrada.</p>
@@ -148,7 +168,7 @@
       </div>
       <div class="field">
         <label for="f-telefone">Telefone</label>
-        <input type="tel" id="f-telefone" placeholder="945 213 124" autocomplete="tel">
+        <input type="tel" id="f-telefone" placeholder="9XX XXX XXX" autocomplete="tel">
       </div>
       <div class="field">
         <label for="f-email">Email</label>
@@ -208,6 +228,7 @@
 <script src="js/gallery.js"></script>
 <script src="js/pricing.js"></script>
 <script src="js/calendar.js"></script>
+<script src="js/pedido.js"></script>
 <script src="js/whatsapp.js"></script>
 <script src="js/app.js"></script>
 </body>

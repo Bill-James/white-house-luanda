@@ -21,8 +21,9 @@
     const telefone = document.getElementById('f-telefone').value.trim() || 'Não informado';
     const obs = document.getElementById('f-obs').value.trim();
     const { lines, total } = BookingState.priceInfo;
+    const food = BookingState.foodInfo;
 
-    return `Olá. Gostaria de reservar o apartamento.\n\nNome: ${nome}\nTelefone: ${telefone}\n\nHorários:\n${lines.join('\n')}\n\nValor total: ${Pricing.formatKz(total)}\n${obs ? `Observações: ${obs}\n` : ''}\nPagamento total com 24h de antecedência.\nAguardo confirmação.`;
+    return `Olá. Gostaria de reservar o apartamento.\n\nNome: ${nome}\nTelefone: ${telefone}\n\nHorários:\n${lines.join('\n')}\n\n${food ? `Comida (para o apartamento):\n${food.lines.join('\n')}\n\n` : ''}Valor total: ${Pricing.formatKz(total + (food ? food.total : 0))}\n${obs ? `Observações: ${obs}\n` : ''}\nPagamento total com 24h de antecedência.\nAguardo confirmação.`;
   }
 
   confirmBtn.addEventListener('click', () => {
@@ -35,7 +36,7 @@
       return;
     }
 
-    const waNumber = (BookingState.contact && BookingState.contact.whatsapp) || '244945213124';
+    const waNumber = (BookingState.contact && BookingState.contact.whatsapp) || '244923881741';
     lastUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(buildMessage())}`;
 
     overlay.removeAttribute('hidden');

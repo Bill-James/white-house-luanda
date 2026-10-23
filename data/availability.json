@@ -11,6 +11,16 @@
     { "id": "t16", "grupo": "Tarde · blocos de 2h seguidas", "label": "16h–18h", "h": 16, "valor": 15000 },
     { "id": "n19", "grupo": "Noite", "label": "19h–7h", "h": 19, "valor": 20000 }
   ],
+  "comida": [
+    { "id": "fc", "grupo": "Fahitas", "nome": "Fahita de Carne", "desc": "Carne moída, pimento, cenoura, cebola, milho e molho especial", "valor": 5000 },
+    { "id": "ff", "grupo": "Fahitas", "nome": "Fahita de Frango", "desc": "Peito de frango, pimentos, cebola, milho e molho especial", "valor": 5500 },
+    { "id": "fm", "grupo": "Fahitas", "nome": "Fahita Mista", "desc": "Carne moída, frango, pimento vermelho e verde, cebola, milho e molho especial", "valor": 6000 },
+    { "id": "fg", "grupo": "Fahitas", "nome": "Fahita Go Crazy", "desc": "Mistério + sabor = go crazy", "valor": 6250 },
+    { "id": "bs", "grupo": "Batatas do Pepê", "nome": "Batata frita sem queijo", "valor": 3750 },
+    { "id": "bc", "grupo": "Batatas do Pepê", "nome": "Batata frita com queijo", "valor": 4250 },
+    { "id": "kt", "grupo": "Batatas do Pepê", "nome": "Kitoza", "desc": "Batata frita, queijo, bacon e molho da casa", "valor": 4900 },
+    { "id": "em", "grupo": "Extra", "nome": "Extra molho", "valor": 500 }
+  ],
   "contacto": {
     "whatsapp": "244923881741",
     "telefone": "+244 923 881 741",

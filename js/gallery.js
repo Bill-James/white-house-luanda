@@ -1,5 +1,3 @@
-// gallery.js — grelha de imagens + lightbox em ecrã inteiro
-
 const GALLERY_ITEMS = [
   {
     img: 'assets/imagens/sala.jpg',
@@ -40,6 +38,17 @@ const GALLERY_ITEMS = [
     img: 'assets/imagens/hero-marginal-luanda.jpg',
     title: 'Marginal de Luanda',
     tags: ['Passeio à Beira-Mar', 'A curta distância']
+  },
+  {
+    img: 'assets/imagens/menu-fahitas.jpg',
+    alt: 'Cardápio de fahitas e batatas do Pepê',
+    fit: 'contain',
+    title: 'Comida e Bebida',
+    tags: ['Fahitas', 'Batatas do Pepê', 'Bebida e Música incluídas'],
+    slides: [
+      { img: 'assets/imagens/menu-fahitas.jpg', title: 'Cardápio · Fahitas' },
+      { img: 'assets/imagens/menu-batatas.jpg', title: 'Cardápio · Batatas do Pepê' }
+    ]
   }
 ];
 
@@ -52,7 +61,7 @@ const GALLERY_ITEMS = [
     el.className = 'gallery-item reveal';
     el.style.transitionDelay = (i % 3) * 0.08 + 's';
     el.innerHTML = `
-      <img src="${item.img}" alt="${item.title} do apartamento" loading="lazy">
+      <img src="${item.img}" alt="${item.alt || item.title + ' do apartamento'}" loading="lazy"${item.fit ? ` style="object-fit:${item.fit};background:#0b0f14"` : ''}>
       <div class="gallery-caption">
         <h4>${item.title}</h4>
         <ul>${item.tags.map((t) => `<li>${t}</li>`).join('')}</ul>
@@ -66,11 +75,34 @@ const GALLERY_ITEMS = [
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxCaption = document.getElementById('lightbox-caption');
   const closeBtn = document.getElementById('lightbox-close');
+  const prev = document.getElementById('lightbox-prev');
+  const next = document.getElementById('lightbox-next');
+
+  let slides = [];
+  let tags = [];
+  let idx = 0;
+
+  function render() {
+    const s = slides[idx];
+    const multi = slides.length > 1;
+    lightboxImg.src = s.img;
+    lightboxImg.alt = s.title;
+    lightboxImg.style.cursor = multi ? 'pointer' : '';
+    lightboxCaption.textContent = `${s.title} — ${tags.join(' · ')}${multi ? ` (${idx + 1}/${slides.length}) · toque na imagem para ver a seguinte` : ''}`;
+    prev.classList.toggle('on', multi);
+    next.classList.toggle('on', multi);
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render();
+  }
 
   function openLightbox(item) {
-    lightboxImg.src = item.img;
-    lightboxImg.alt = item.title;
-    lightboxCaption.textContent = `${item.title} — ${item.tags.join(' · ')}`;
+    slides = item.slides || [{ img: item.img, title: item.title }];
+    tags = item.tags;
+    idx = 0;
+    render();
     lightbox.removeAttribute('hidden');
     document.body.style.overflow = 'hidden';
   }
@@ -84,7 +116,11 @@ const GALLERY_ITEMS = [
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) closeLightbox();
   });
+  lightboxImg.addEventListener('click', () => slides.length > 1 && step(1));
+  prev.addEventListener('click', () => step(-1));
+  next.addEventListener('click', () => step(1));
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeLightbox();
+    else if (!lightbox.hasAttribute('hidden') && slides.length > 1 && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) step(e.key === 'ArrowRight' ? 1 : -1);
   });
 })();

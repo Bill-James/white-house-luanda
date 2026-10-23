@@ -7,7 +7,8 @@ const AMENITIES = [
   { icon: '❄️', label: 'Climatização' },
   { icon: '📺', label: 'Serviço de TV' },
   { icon: '🚿', label: 'Água Quente' },
-  { icon: '🍳', label: 'Cozinha Equipada' }
+  { icon: '🍳', label: 'Cozinha Equipada' },
+  { icon: '🌯', label: 'Comida e Bebida com Música' }
 ];
 
 (function () {

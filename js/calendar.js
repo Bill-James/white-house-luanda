@@ -1,4 +1,4 @@
-const BookingState = { items: [], priceInfo: null, contact: null };
+const BookingState = { items: [], priceInfo: null, foodInfo: null, contact: null };
 
 (function () {
   const msgEl = document.getElementById('calendar-msg');
@@ -17,6 +17,7 @@ const BookingState = { items: [], priceInfo: null, contact: null };
       BookingState.contact = data.contacto || null;
       initCalendar();
       renderFooterContact(data.contacto);
+      document.dispatchEvent(new CustomEvent('data:ready', { detail: data }));
     })
     .catch(initCalendar);
 
@@ -85,15 +86,19 @@ const BookingState = { items: [], priceInfo: null, contact: null };
 
   function updateSummary() {
     const p = BookingState.priceInfo;
+    const f = BookingState.foodInfo;
     const set = (id, v) => (document.getElementById(id).innerHTML = v);
     set('sum-slots', p ? p.lines.join('<br>') : '—');
     set('sum-count', p ? `${p.count} ${p.count === 1 ? 'período' : 'períodos'}` : '—');
-    set('sum-total', p ? Pricing.formatKz(p.total) : '—');
+    set('sum-food', f ? f.lines.join('<br>') : '—');
+    set('sum-total', p || f ? Pricing.formatKz((p ? p.total : 0) + (f ? f.total : 0)) : '—');
     confirmBtn.disabled = !p;
     confirmHint.textContent = p
       ? 'Reveja os seus dados e confirme a reserva.'
       : 'Selecione data e horário em "Disponibilidade" para continuar.';
   }
+
+  document.addEventListener('food:changed', updateSummary);
 
   document.addEventListener('booking:reset', () => {
     BookingState.items = [];
